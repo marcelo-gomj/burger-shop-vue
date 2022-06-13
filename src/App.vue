@@ -1,16 +1,16 @@
 <template>
     <NavBar :logo="logo_src" :alt="app_name" />
     <router-view />
-    <Footer />
+    <FooterEnd />
 </template>
 
 <script> 
     import NavBar from "../src/components/NavBar.vue";
-    import Footer from "../src/components/Footer.vue";
+    import FooterEnd from "../src/components/FooterEnd.vue";
 export default {
     components: {
         NavBar,
-        Footer
+        FooterEnd
     },
     data(){
         return {
@@ -24,33 +24,21 @@ export default {
 
 <style>
 *{
+    font-family: Helvetica;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
-main{
-    display: flex;
-    background-color: rgb(221, 81, 0);
-    height: 100vh;
-    widows: 100%;
-    padding-top: 5%;
-    flex-direction: column;
-    align-items: center;
-}
-.container-input{
-    width: 60%;
+.main-container{
+    margin: 50px;
+    min-height: 250px;
 }
 
-input{
-    width: 100%;
-    height: 2rem;
-    background: none;
-    border: 2px solid white;
+h1{
+    text-align: center;
+    font-size: 42px;
+    margin-bottom: 30px;
+    color: #222;
 }
-
-input:focus{
-    border: none;
-}
-
 </style>

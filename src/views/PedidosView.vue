@@ -1,10 +1,12 @@
 <template>
-  <p>Footer</p>
+  <div class="main-container">
+    <h1>Pedidos</h1>
+  </div>
 </template>
 
 <script>
 export default {
-  name : "NavBar",
+
 }
 </script>
 
