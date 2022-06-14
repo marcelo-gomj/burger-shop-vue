@@ -2,39 +2,44 @@
   <div>
     <p>Componente de Mensagem</p>
     <div>
-      <form action="" id="burger-form">
+      <form action="" id="burger-form" @submit="createBurger">
         <div class="input-container">
           <label for="name">Nome do cliente</label>
           <input type="text" name="name" id="name" v-model="name" placeholder="Digite o seu nome:">
         </div>
+
         <div class="input-container">
           <label for="bread">Escolha o pão: </label>
-          <select name="bread" id="bread">
+          <select name="bread" id="bread" v-model="bread">
             <option value="">Selecione o seu pão</option>
-            <option value="Integral">Integral</option>
+            <option v-for="bread in breads" :key="bread.id" :value="bread.tipo">
+              {{ bread.tipo }}
+            </option>
           </select>
         </div>
+
         <div class="input-container">
           <label for="meat">Escolha a carne do seu burger:</label>
-          <select name="meat" id="meat">
+          <select name="meat" id="meat" v-model="meat">
             <option value="">Selecione o tipo da carne</option>
-            <option value="maminha">Maminha</option>
+            <option v-for="meat in meats" :key="meat.id" :value="meat.tipo">{{meat.tipo}}</option>
           </select>
         </div>
+
         <div id="optionals-container" class="input-container">
+          
           <label id="optionals-title" for="optionals">Selecione os opcionais:</label>
-          <div class="checkbox-container">
-            <input type="checkbox" value="salame" name="optionals" v-model="optionals">
-            <span>salame</span>
+          
+          <div v-for="optional in optionalsData" 
+            :key="optional.id" 
+          
+            class="checkbox-container"
+          >
+            <input type="checkbox" :value="optional.tipo" name="optionals" v-model="optionals">
+            <span>{{ optional.tipo }}</span>
+
           </div>
-          <div class="checkbox-container">
-            <input type="checkbox" value="salame" name="optionals" v-model="optionals">
-            <span>salame</span>
-          </div>
-          <div class="checkbox-container">
-            <input type="checkbox" value="salame" name="optionals" v-model="optionals">
-            <span>salame</span>
-          </div>
+        
         </div>
 
         <div class="input-container">
@@ -47,7 +52,57 @@
 
 <script>
 export default {
-  name : 'BurgerForm'
+  name : 'BurgerForm',
+  data (){
+    return {
+      breads : null,
+      meats: null,
+      optionalsData: null,
+      name: null,
+      bread: null,
+      meat: null,
+      optionals: [],
+      msg: null
+    }
+  },
+  methods: {
+    async getIngredientes(){
+      const req = await fetch('http://localhost:3000/ingredientes')
+      const data = await req.json();
+
+      this.breads = data.paes
+      this.meats = data.carnes
+      this.optionalsData = data.opcionais
+    },
+
+    async createBurger(e){
+      e.preventDefault();
+
+      const data = {
+        name: this.name,
+        meat: this.meat,
+        bread: this.bread,
+        optionals: Array.from(this.optionals),
+        status : "Solicitado"
+      }
+
+      const dataJson = JSON.stringify(data);
+
+      const req = await fetch('http://localhost:3000/burgers', {
+        method : 'POST',
+        headers: {"Content-Type" : "application/json"},
+        body: dataJson 
+      })
+
+      const res = await req.json();
+
+      //colocar uma mensagem no
+    }
+  },
+
+  mounted(){
+    this.getIngredientes()
+  }
 }
 </script>
 
