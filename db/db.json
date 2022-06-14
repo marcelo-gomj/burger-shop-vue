@@ -77,5 +77,47 @@
       "tipo": "Finalizado"
     }
   ],
-  "burgers": []
+  "burgers": [
+    {
+      "name": "Marcelo Gomes",
+      "meat": "Veggie burger",
+      "bread": "3 Queijos",
+      "optionals": [],
+      "status": "Solicitado",
+      "id": 1
+    },
+    {
+      "name": "Marcelo Gomes",
+      "meat": "Veggie burger",
+      "bread": "3 Queijos",
+      "optionals": [],
+      "status": "Solicitado",
+      "id": 2
+    },
+    {
+      "name": "Marcelo Gomes",
+      "meat": "Veggie burger",
+      "bread": "3 Queijos",
+      "optionals": [
+        "Bacon",
+        "Cheddar",
+        "Tomate",
+        "Cebola roxa"
+      ],
+      "status": "Solicitado",
+      "id": 3
+    },
+    {
+      "name": "Marcelo Gomes",
+      "meat": "Picanha",
+      "bread": "3 Queijos",
+      "optionals": [
+        "Bacon",
+        "Tomate",
+        "Pepino"
+      ],
+      "status": "Solicitado",
+      "id": 4
+    }
+  ]
 }
