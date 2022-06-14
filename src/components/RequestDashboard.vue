@@ -11,21 +11,25 @@
             </div>
         </div>
         <div id="buger-table-rows">
-            <div class="burger-table-row">
-                <div class="order-number">1</div>
-                <div>João</div>
-                <div>Pão de Trigo</div>
-                <div>Maminha</div>
+            <div class="burger-table-row"
+                v-for="burger in burgers"
+                :key="burger.id"
+            >
+                <div class="order-number">{{ burger.id }}</div>
+                <div>{{ burger.name }}</div>
+                <div>{{ burger.bread }}</div>
+                <div>{{ burger.meat }}</div>
 
                 <div>
                     <ul>
-                        <li>Salame</li>
-                        <li>Salame</li>
+                        <li v-for="(optional, index) in burger.optionals" 
+                            :key="index"
+                        >{{ optional }}</li>
                     </ul>
                 </div>
                 <div>
                     <select name="status" class="status">
-                        <option value="">Selecione o status do Hamburger</option>
+                        <option value="">Selecione</option>
                     </select>
                     <button class="delete-btn">Cancelar</button>
                 </div>
@@ -36,10 +40,85 @@
 
 <script>
 export default {
+    name: "RequestDashboard",
+    data(){
+        return {
+            burgers: null,
+            burger_id: null,
+            status: []
+        }
+    },
+    methods: {
+        async getRequests(){
+            const req = await fetch('http://localhost:3000/burgers');
 
+            const data = await req.json();
+
+            this.burgers = data;
+        }
+    }, 
+    mounted(){
+        this.getRequests()
+    }
 }
 </script>
 
-<style>
+<style scoped>
+
+    #burger-table{
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    #burger-table-heading,
+    #burger-table-rows,
+    .burger-table-row{
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    #burger-table-heading{
+        font-weight: bold;
+        padding: 12px;
+        border-bottom: 3px solid #333;
+    }
+
+    #burger-table-heading div,
+    .burger-table-row div{
+        width: 19%;
+    }
+
+    .burger-table-row{
+        width: 100%;
+        padding: 12px;
+        border-bottom: 1px solid #CCC;
+    }
+
+    #burger-table-heading .order-id,
+    .burger-table-row .order-number{
+        width: 5%;
+    }
+
+    select{
+        padding: 12px 6px;
+        margin-right: 12px;
+    }
+
+    .delete-btn{
+        background-color: #222;
+        color: #FCBA03;
+        font-weight: bold;
+        border: 2px solid #222;
+        padding: 10px;
+        font-size: 16px;
+        margin: 0 auto;
+        cursor: pointer;
+        transition: 0.5s;
+    }
+
+    .delete-btn:hover{
+        background-color: transparent;
+        color: #222;
+    }
 
 </style>
