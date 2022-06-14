@@ -91,26 +91,6 @@
       "id": 1
     },
     {
-      "name": "Juca Henrique",
-      "meat": "Alcatra",
-      "bread": "3 Queijos",
-      "optionals": [],
-      "status": "Solicitado",
-      "id": 2
-    },
-    {
-      "name": "Daniel Gomes",
-      "meat": "Maminha",
-      "bread": "Parmesão e Orégano",
-      "optionals": [
-        "Salame",
-        "Tomate",
-        "Cheddar"
-      ],
-      "status": "Solicitado",
-      "id": 3
-    },
-    {
       "name": "Lucas Santos",
       "meat": "Alcatra",
       "bread": "Parmesão e Orégano",
